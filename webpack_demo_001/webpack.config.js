@@ -59,8 +59,19 @@ var dev = {
       // 模板文件也要改
       template: `${opts.src}index.html`, // 模版文件
     }),
-    new webpack.HotModuleReplacementPlugin() // 热加载插件
+    // 热加载插件
+    new webpack.HotModuleReplacementPlugin() 
   ],
+  devServer: {
+    port: 1234,
+    contentBase: dev_base_str,
+    historyApiFallback: true,
+    // 配置HMR之后可以选择开启 ，热加载
+    hot: true, 
+    // 实时刷新
+    inline: true 
+    noInfo: true,
+  },
   module: {
     rules: [
       // vue
@@ -114,14 +125,7 @@ var dev = {
     ]
   },
   resolve: {},
-  devServer: {
-    port: 1234,
-    contentBase: dev_base_str,
-    historyApiFallback: true,
-    hot: true, // 配置HMR之后可以选择开启
-    noInfo: true,
-    inline: true // 实时刷新
-  },
+  
 };
 
 
@@ -303,7 +307,7 @@ var build = {
         query: {
           limit: 10000,
           // 一样这个。
-          name: 'fonts/[name].[hash:7].[ext]'
+          name: `${opts.fonts}/[name].[hash:7].[ext]`
         }
       },
       // img
@@ -314,7 +318,7 @@ var build = {
         query: {
           limit: 1,
           // 一样这个。
-          name: 'imgs/[name].[hash:7].[ext]'
+          name: `${opts.imgs}/[name].[hash:7].[ext]`
         }
       }
     ]

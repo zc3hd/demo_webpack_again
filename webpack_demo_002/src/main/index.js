@@ -7,5 +7,5 @@ require.ensure([], function(require) {
 import './index.less';
 // require('./index.less');
 $('#app')
-  .html('这只是个简单的打包');
+  .html('这只是个简单的打包 demo2-1');
 // .css('background','url("./img/logo.png")');
