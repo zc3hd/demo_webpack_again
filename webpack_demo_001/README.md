@@ -186,8 +186,8 @@ publicPath: '/dist/',
   }
 }
 ```
-* 为什么要一样的目录输出？因为ExtractTextPlugin的输出的css可以改变路径，index.html的css引入也可以相应的进行改变，但是css里面的img和font就还是原来的路径。
-* 所以无形中，css的路径也是要和src里一样，是img和font决定的。
+* 为什么要一样的目录输出？因为ExtractTextPlugin的输出的css可以改变路径，index.html的css引入也可以相应的进行改变，但是在css里，引入的img和font就还是原来的路径。
+* 所以无形中，css的配置路径也是要和src里一样，实质是由img和font决定的。
 * 那么如果js需要引入img文件，刚才测试下。会说找不到img,因为devServer是以src为根路径的，图片会以src下找。遇见这样的情况，还是在css里使用就好了。JS操作类名就行。
 * 但是其他依赖的文件会以src为根目录进行请求资源。
 
@@ -212,3 +212,24 @@ devServer: {
 
 指定的来源还是来自src下 模块的目录结构。
 ```
+
+##### 8 实现配置
+
+```
+// 指定测试哪个模块
+var one = './src/main_2/';
+
+//  指定其他配置项：目标根路径，img图片压缩的地址，字体压缩的地址
+var opts = {
+  // 目标文件夹
+  src: one,
+
+  // 目标文件夹
+  dist: "webapp",
+  img: 'imgs',
+  font: 'fonts',
+};
+```
+
+* gulp:是实时打包，服务是以webapp编译后的文件为服务的
+* webpack:是以dev模式下的文件起服务的。编译时另外一个。index.html更新不会有变化，主要是监听和js有关的所有。
