@@ -1,7 +1,11 @@
-require.ensure([], function(require) {
-  var a = require('./a.js');
-  console.log(a);
-}, 'a');
+// require.ensure([], function(require) {
+//   var a = require('./a.js');
+//   console.log(a);
+// }, 'a');
+
+const a = resolve => require([
+  './a.js'
+], resolve);
 
 
 import './index.less';

@@ -1,5 +1,5 @@
 // 要测试那个模块
-var one = './src/vue_demo/app_out/';
+var one = './src/vue_demo/';
 
 
 
@@ -100,7 +100,7 @@ if (process.env.NODE_ENV == 'dev') {
           query: {
             limit: 10000,
             // 一样这个。
-            name: `${opts.fonts}/[name].[hash:7].[ext]`
+            name: `${opts.font}/[name].[hash:7].[ext]`
           }
         },
         // img
@@ -111,7 +111,7 @@ if (process.env.NODE_ENV == 'dev') {
           query: {
             limit: 10000,
             // 一样这个。
-            name: `${opts.imgs}/[name].[hash:7].[ext]`
+            name: `${opts.img}/[name].[hash:7].[ext]`
           }
         }
       ]
@@ -257,7 +257,7 @@ else {
           query: {
             limit: 10000,
             // 一样这个。
-            name: `${opts.fonts}/[name].[hash:7].[ext]`
+            name: `${opts.font}/[name].[hash:7].[ext]`
           }
         },
         // img
@@ -268,7 +268,7 @@ else {
           query: {
             limit: 1,
             // 一样这个。
-            name: `${opts.imgs}/[name].[hash:7].[ext]`
+            name: `${opts.img}/[name].[hash:7].[ext]`
           }
         }
       ]
