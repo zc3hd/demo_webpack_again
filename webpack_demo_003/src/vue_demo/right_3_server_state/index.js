@@ -1,29 +1,29 @@
 // 服务器空闲率
 var server_kx_data = {
-  key: ['10.10.10.1', '10.10.10.2', '10.10.10.3'],
+  key: ['info-1', 'info-2', 'info-3'],
   val: [
     //
     {
-      name: "CPU",
+      name: "指标1",
       arr: [
         //
         {
           value: 1,
-          name: "10.10.10.1",
+          name: "info-1",
           ac: 35,
           limit: [30, 50, 1],
         },
         //
         {
           value: 1,
-          name: "10.10.10.2",
+          name: "info-2",
           ac: 60,
           limit: [30, 50, 1],
         },
         //
         {
           value: 1,
-          name: "10.10.10.3",
+          name: "info-3",
           ac: 10,
           limit: [30, 50, 1],
         },
@@ -31,26 +31,26 @@ var server_kx_data = {
     },
     //
     {
-      name: "内存",
+      name: "指标2",
       arr: [
         //
         {
           value: 1,
-          name: "10.10.10.1",
+          name: "info-1",
           ac: 10,
           limit: [30, 50, 1],
         },
         //
         {
           value: 1,
-          name: "10.10.10.2",
+          name: "info-2",
           ac: 10,
           limit: [30, 50, 1],
         },
         //
         {
           value: 1,
-          name: "10.10.10.3",
+          name: "info-3",
           ac: 10,
           limit: [30, 50, 1],
         },
@@ -58,26 +58,26 @@ var server_kx_data = {
     },
     //
     {
-      name: "文件系统",
+      name: "指标3",
       arr: [
         //
         {
           value: 1,
-          name: "10.10.10.1",
+          name: "info-1",
           ac: 10,
           limit: [30, 50, 1],
         },
         //
         {
           value: 1,
-          name: "10.10.10.2",
+          name: "info-2",
           ac: 10,
           limit: [30, 50, 1],
         },
         //
         {
           value: 1,
-          name: "10.10.10.3",
+          name: "info-3",
           ac: 10,
           limit: [30, 50, 1],
         },
@@ -85,26 +85,26 @@ var server_kx_data = {
     },
     //
     {
-      name: "SWAP空间",
+      name: "指标4",
       arr: [
         //
         {
           value: 1,
-          name: "10.10.10.1",
+          name: "info-1",
           ac: 10,
           limit: [30, 50, 1],
         },
         //
         {
           value: 1,
-          name: "10.10.10.2",
+          name: "info-2",
           ac: 10,
           limit: [30, 50, 1],
         },
         //
         {
           value: 1,
-          name: "10.10.10.3",
+          name: "info-3",
           ac: 10,
           limit: [30, 50, 1],
         },
@@ -112,26 +112,26 @@ var server_kx_data = {
     },
     //
     {
-      name: "硬盘空间",
+      name: "指标5",
       arr: [
         //
         {
           value: 1,
-          name: "10.10.10.1",
+          name: "info-1",
           ac: 10,
           limit: [30, 50, 1],
         },
         //
         {
           value: 1,
-          name: "10.10.10.2",
+          name: "info-2",
           ac: 10,
           limit: [30, 50, 1],
         },
         //
         {
           value: 1,
-          name: "10.10.10.3",
+          name: "info-3",
           ac: 10,
           limit: [30, 50, 1],
         },
@@ -177,7 +177,6 @@ export default {
       server_obj: {
         sum:0,
         color: ["rgb(127,159,222)", "rgb(249,205,90)", "rgb(34,219,179)"],
-        title: ['CPU', '内存', '文件系统', 'SWAP空间', '硬盘空间', 'inodes'],
       },
 
     };
@@ -242,7 +241,7 @@ export default {
 
             return `<div class="server_hot">
                           <div class="item name">${params.data.name}</div>
-                          <div class="item info">空闲:${params.data.ac}%</div>
+                          <div class="item info">data:${params.data.ac}%</div>
 
                         </div>`;
           }

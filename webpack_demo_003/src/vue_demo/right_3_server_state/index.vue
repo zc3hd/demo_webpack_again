@@ -1,6 +1,6 @@
 <template>
   <div class="info_box" id="server_box">
-    <div class="title">服务器空闲率 共{{server_obj.sum}}台</div>
+    <div class="title">XX指标显示</div>
 
     <div class="pie_box" id="box_0">
       <div class="box">
