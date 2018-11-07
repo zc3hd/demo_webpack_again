@@ -54,4 +54,7 @@ require.ensure([], function(require) {
 * 要看到是不一样的异步加载模块，这个要注意
 * 最后，打包的名字不一样。vue异步组件打包的名称是从0开始命名，而我们用的JS模块是用自己的文件名，这个也得注意。
 
-* 这个vue的demo是个适用的可视化。
+* vue demo效果：
+![image](https://github.com/zc3hd/demo_webpack_again/blob/master/webpack_demo_003/imgs/c2.gif)
+
+
