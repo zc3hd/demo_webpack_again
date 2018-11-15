@@ -1,5 +1,5 @@
 // 要测试那个模块
-var one = './src/vue_demo/app_out/';
+var one = './src/main/';
 
 
 
@@ -125,6 +125,12 @@ if (process.env.NODE_ENV == 'dev') {
     //   inline: true // 实时刷新
     // },
   };
+
+  var ccc = path.join(__dirname,dev_base_str);
+
+  console.log(ccc);
+
+
   const compiler = webpack(conf);
   const server = new WebpackDevServer(compiler, {
     open: true,

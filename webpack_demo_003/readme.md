@@ -22,12 +22,31 @@ src/vue_demo/index.html index.js
 * 4.img:发现less里面所有依赖的img图片都被最后打包到目标文件下的imgs文件夹下，不管在src的组件是哪层引用，最后都会被归为一起。
 * 5.css里的img路径：因为css被写入JS内，imgs被归为一起，css里的图片路径都直接变成最终目录的路径形式，是因为在 .vue 文件中引用的结果么？那就是vue-loader是很强大的。
 
+* 注意1：JS里引入的img地址，webpack不会把img抽取出来，更不会改变JS内部的img的路径。遇见这样的问题需要手动将这部分的JS放入最后打包的地方。（问题：找可以抽出来的包）
+* 注意2：测试模式，src会被作为一个静态资源的服务器的根目录，所以测试时内部的img路径是这样的。
+```
+conf: {
+  dev_img_url: '/vue_demo/mid_main',
+  build_img_url: ".",
+},
+
+var img_url = '';
+if (conf.build) {
+  img_url = me.conf.build_img_url;
+}
+else {
+  img_url = me.conf.dev_img_url;
+}
+
+```
+* 注意3：echarts的地球展示，需要在服务器端口的模式进行展示。文件访问会有错。
+
 ---------------------
 
 ### 4.build：vue与纯JS开发的比较
 
-* 【css里的引用不可变化】和less直接被引入JS中不同，less会被剥离成css，被剥离的话，就会有个css的路径，但是因为css剥离出来里面引用的img地址不会变，所以无形中imgs和fonts就被固定了。因为JS中引入less，被剥离为css，内部引入不会变，所以img也无形中被固定。
-* 【css里的引用可变化】vue中，less不会被剥离，且img按照我们设置好的路径进行编译写入，最为重要的是JS里的css的img引用也会随之变化。
+* 【css里的引用不可变化】和less直接被引入JS中不同，less会被剥离成css，被剥离的话，就会有个css的路径，但是因为css剥离出来里面引用的img地址不会变，所以无形中imgs和fonts就被固定了。因为JS中引入less，被剥离为css，内部引入不会变，所以img也无形中被固定。剥离出来css这个插件还不够强大
+* 【css里的引用可变化】vue中，less不会被剥离，且img按照我们设置好的路径进行编译写入，最为重要的是JS里的css的img引用也会随之变化。vue-loader在处理JS内的css就比较厉害了。
  
 ---------------------
 
@@ -56,5 +75,8 @@ require.ensure([], function(require) {
 
 * vue demo效果：
 ![image](https://github.com/zc3hd/demo_webpack_again/blob/master/webpack_demo_003/imgs/c2.gif)
+
+
+
 
 

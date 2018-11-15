@@ -135,6 +135,7 @@ new ExtractTextPlugin('[name].[hash:7].css'),
 
 ##### 4 html的输入和输出
 
+* 里面所有的引入都是按照 index.html这层所在地址 进行相对路径写的。这个是模块本身的功能。
 ```
 new HtmlWebpackPlugin({
     // 模版文件

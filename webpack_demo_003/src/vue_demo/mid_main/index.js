@@ -3,17 +3,30 @@ export default {
   data: function() {
     return {
       // 所有的配置项
-      conf: {},
+      conf: {
+        dev_img_url: '/vue_demo/mid_main',
+        build_img_url: ".",
+      },
     };
   },
   mounted: function() {
     var me = this;
-
+    console.log(conf);
     me._make();
   },
   methods: {
     _make: function() {
+      var me = this;
       var myChart = echarts.init(document.getElementById('earth'));
+
+      var img_url = '';
+      if (conf.build) {
+        img_url = me.conf.build_img_url;
+      }
+      else {
+        img_url = me.conf.dev_img_url;
+      }
+
 
       myChart.setOption({
         globe: {
@@ -21,12 +34,12 @@ export default {
           globeRadius: 70,
           globeOuterRadius: 60,
           // 环境贴图
-          environment: '/vue_demo/mid_main/img/map_wl.jpg',
+          environment: img_url + '/img/map_wl.jpg',
           // 地球的纹理。支持图片路径字符串，图片或者 Canvas 的对象
-          baseTexture: '/vue_demo/mid_main/img/map.jpg',
-          
+          baseTexture: img_url + '/img/map.jpg',
+
           // 地球的高度纹理。高度纹理可以用于凹凸贴图表现地球表面的明暗细节
-          heightTexture: "/vue_demo/mid_main/img/map_wl.jpg",
+          heightTexture: img_url + "/img/map_wl.jpg",
           // 纹理的抬高倍数
           displacementScale: 0.1,
           // 地球顶点位移的质量。支持设置成 'low', 'medium', 'high', 'ultra' 。更高的质量能够表现更多的地表高度细节
@@ -60,14 +73,14 @@ export default {
               shadowQuality: 'ultra',
             },
             ambientCubemap: {
-              texture: '/vue_demo/mid_main/img/pisa.hdr',
+              texture: img_url + '/img/pisa.hdr',
               exposure: 1,
               diffuseIntensity: 1,
               specularIntensity: 1
             }
           },
           layers: [{
-            texture: '/vue_demo/mid_main/img/map_wl.jpg',
+            texture: img_url + '/img/map_wl.jpg',
           }]
         }
       });

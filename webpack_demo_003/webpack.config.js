@@ -10,7 +10,7 @@ var opts = {
 
   // 目标文件夹
   dist: "webapp",
-  img: 'imgs',
+  img: 'img',
   font: 'fonts',
 
   // 
