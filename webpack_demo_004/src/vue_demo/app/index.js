@@ -21,21 +21,20 @@ var fuwu_data = Test.fuwu_data;
 
 var cors_fuwu_data = Test.cors_fuwu_data;
 
-// ==================================================
 // zuo左边
 const left_all_info = resolve => require([
   '../left_1_all_info/index.vue'
 ], resolve);
+
 import left_cors_run_info from '../left_2_cors_run_info/index.vue';
 import left_cors_data_info from '../left_3_cors_data_info/index.vue';
 
-// ==================================================
 // mid
 const mid_main_cpt = resolve => require([
   '../mid_main/index.vue'
 ], resolve);
 
-// ==================================================
+
 // right
 import right_suanfa_user_info from '../right_1_suanfa_user/index.vue';
 import right_oneWeek_user from '../right_2_oneWeek_user/index.vue';
