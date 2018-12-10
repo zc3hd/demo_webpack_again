@@ -4,11 +4,10 @@
 
 * 解决node-4最后提出的问题：前端用webpack进行测试和build，后台用express提供服务。怎么产生一个工具。
 
-### 2.开始 JS_demo
+### 2.JS_demo
 
 * **前端：**
-* 可能是没有复习webpack或实战，webpack测试的时候的HTML里不需要引入自己写的index.css和index.js。less要被引入js内部。
-* 这个有点不习惯，因为gulp是对打包后的模块进行静态资源提供服务，所以就需要前期在HTML内部把JS和css都引入。
+* 可能是没有复习webpack或实战，webpack测试的时候的HTML里不需要引入自己写的index.css和index.js。less要被引入js内部。这个有点不习惯，因为gulp是对打包后的模块进行静态资源提供服务，所以就需要前期在HTML内部把JS和css都引入。
 
 * **node：**
 * 前端写的业务这次就是个实时请求数据。后台也是按照前面的模块化进行构建。所以这次就没有连接到表，直接在api业务模块提供数据服务。
