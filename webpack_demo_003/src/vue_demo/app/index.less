@@ -18,16 +18,11 @@ li {
 
 // 左右边的大小
 @side_w: 26%;
-
-// 选择框的高度
-@sel_h: 24px;
-@sel_margin_top: 4px;
-
 // 主背景颜色
-@main_bgc:#123;
+@main_bgc: #123;
 // 子项的颜色
-@item_bgc:#000080;
-@item_title_color:#ffffff;
+@item_bgc: #000080;
+@item_title_color: #ffffff;
 
 /* 主页面 */
 
@@ -108,7 +103,6 @@ li {
     >.cors_info {
       height: 30%;
       padding-bottom: 10px;
-
     }
   }
   // 右边
@@ -177,13 +171,34 @@ li {
     padding: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
+    >.main_box {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      box-sizing: border-box;
+      padding-top: 30px;
+      >.ele_cpt {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 30px;
+      }
+      >.main_cpt {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 }
 
 
 /* 基站的有效率和延时 */
+
 .cors_status_hot,
+
 /* 服务器状态的 空闲率 爆表的dom */
+
 .server_hot {
   width: 200px;
   height: 26px;

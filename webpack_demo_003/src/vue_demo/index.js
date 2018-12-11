@@ -12,6 +12,13 @@
 //   scrollBehavior: () => ({ y: 0 }),
 //   routes: routes
 // });
+// ================================================ele_ui;
+// import { DatePicker, Select } from 'element-ui';
+// Vue.use(DatePicker);
+// Vue.use(Select);
+
+import { DatePicker} from 'element-ui';
+Vue.use(DatePicker);
 
 
 // ================================================vuex
@@ -29,4 +36,3 @@ new Vue({
   // =====================vuex
   // store:store,
 });
-

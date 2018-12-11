@@ -1,33 +1,17 @@
-// console.log(a_obj.A);
-// require.ensure([], function(require) {
-//   var a = require('./a.js');
-//   console.log(a);
-// }, 'a');
-
-
-
-import Test from './test_data.js';
-
-// 模拟的行业数据
-var hangye_data = Test.hangye_data;
-
-
-// 接入统计
-var cors_sum_data = Test.cors_sum_data;
-var fuwu_gl_data = Test.fuwu_gl_data;
-var fuwu_nh_data = Test.fuwu_nh_data;
-var fuwu_hy_data = Test.fuwu_hy_data;
-var fuwu_data = Test.fuwu_data;
-
-var cors_fuwu_data = Test.cors_fuwu_data;
-
 // ==================================================
 // zuo左边
-const left_all_info = resolve => require([
-  '../left_1_all_info/index.vue'
-], resolve);
-import left_cors_run_info from '../left_2_cors_run_info/index.vue';
-import left_cors_data_info from '../left_3_cors_data_info/index.vue';
+// const left_all_info = resolve => require([
+//   '../left_1_all_info/index.vue'
+// ], resolve);
+
+// const left_cors_run_info = resolve => require([
+//   '../left_2_cors_run_info/index.vue'
+// ], resolve);
+
+// const left_cors_data_info = resolve => require([
+//   '../left_3_cors_data_info/index.vue'
+// ], resolve);
+
 
 // ==================================================
 // mid
@@ -35,26 +19,42 @@ const mid_main_cpt = resolve => require([
   '../mid_main/index.vue'
 ], resolve);
 
+const mid_ele_cpt = resolve => require([
+  '../mid_ele/index.vue'
+], resolve);
+
+
 // ==================================================
 // right
-import right_suanfa_user_info from '../right_1_suanfa_user/index.vue';
-import right_oneWeek_user from '../right_2_oneWeek_user/index.vue';
-import right_server_state from '../right_3_server_state/index.vue';
+// const right_suanfa_user_info = resolve => require([
+//   '../right_1_suanfa_user/index.vue'
+// ], resolve);
+
+// const right_oneWeek_user = resolve => require([
+//   '../right_2_oneWeek_user/index.vue'
+// ], resolve);
+
+// const right_server_state = resolve => require([
+//   '../right_3_server_state/index.vue'
+// ], resolve);
+
+
 
 
 
 
 export default {
   components: {
-    left_all_info: left_all_info,
-    left_cors_run_info: left_cors_run_info,
-    left_cors_data_info: left_cors_data_info,
+    // left_all_info: left_all_info,
+    // left_cors_run_info: left_cors_run_info,
+    // left_cors_data_info: left_cors_data_info,
 
-    mid_main_cpt:mid_main_cpt,
+    // mid_main_cpt:mid_main_cpt,
+    mid_ele_cpt:mid_ele_cpt,
 
-    right_suanfa_user_info: right_suanfa_user_info,
-    right_oneWeek_user: right_oneWeek_user,
-    right_server_state: right_server_state,
+    // right_suanfa_user_info: right_suanfa_user_info,
+    // right_oneWeek_user: right_oneWeek_user,
+    // right_server_state: right_server_state,
   },
   // name: 'main_app',
   data: function() {

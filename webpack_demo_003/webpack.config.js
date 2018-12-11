@@ -14,8 +14,14 @@ var opts = {
   font: 'fonts',
 
   // 
-  port:1234,
+  port: 1010,
 };
+
+
+
+
+
+
 
 var one_arr = one.split('/');
 var server_base = [];
@@ -172,6 +178,8 @@ else {
   const build = {
     entry: {
       index: `${opts.src}index.js`,
+      // 依赖的公共文件，需要单独打包在下面--CommonsChunkPlugin--就要具体设置下。
+      // ele_ui: ['element-ui'],
     },
     output: {
       // 1.指定输出的根目录
@@ -184,6 +192,15 @@ else {
       chunkFilename: 'async.[name].[hash:7].js',
     },
     plugins: [
+      // -------------------------------------提取公共文件
+      // 公共文件输出的路径和名字
+      // new webpack.optimize.CommonsChunkPlugin({
+      //   // 寻找数组中每个入口的公共名字进行提取
+      //   name: ['ele_ui'],
+      //   // 控制输出地址和名字设置
+      //   filename: 'common.[name].[hash:7].js',
+      //   minChunks: Infinity,
+      // }),
       // -------------------------------------css--生成的地方
       new ExtractTextPlugin('[name].[hash:7].css'),
       // -------------------------------------压缩JS文件
@@ -196,7 +213,7 @@ else {
         minimize: true
       }),
 
-      // ------------------------------------模板入口--各是各自的脚本
+      // ------------------------------------模板HTML入口--各是各自的脚本
       new HtmlWebpackPlugin({
         // 模版文件
         template: `${one}index.html`,
