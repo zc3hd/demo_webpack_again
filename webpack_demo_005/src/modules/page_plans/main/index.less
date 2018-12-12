@@ -1,0 +1,451 @@
+* {
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  // 
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Microsoft Yahei';
+  border: 0;
+  background-color: #333;
+}
+
+// 单元的设置
+@sp_border_color: rgba(0, 0, 0, 0);
+// 字体颜色
+@sp_done_color: #808080;
+@sp_now_color: #fff;
+@sp_will_color: #fff;
+// ====================================table
+// 
+// ====================================title
+// 标题颜色
+@title_bg_done: rgba(0, 0, 0, 0.9);
+@title_bg_now: rgba( 255, 69, 0, 0.65);
+@title_bg_will: rgba( 127, 255, 0, 0.65);
+// 标题的高
+@title_h: 40px;
+// ====================================item
+// item颜色
+@item_bg_done: rgba(0, 0, 0, 0.75);
+@item_bg_now: rgba( 255, 69, 0, 0.8);
+@item_bg_will: rgba( 127, 255, 0, 0.8);
+// item的高
+@item_h: 30px;
+// ====================================lun
+@lun_h: 20px;
+@lun_bg_done: #808080;
+@lun_color_done: rgba(0, 0, 0, 0.75);
+// 
+@lun_bg_now: #DC143C;
+@lun_color_now: #fff;
+// 
+@lun_bg_will: green;
+@lun_color_will: #fff;
+.el-message p {
+  font-weight: 800;
+  color: #000;
+}
+
+
+/* ------------------------------ */
+
+.app {
+  width: 100%;
+  height: 100%;
+  background-color: #333;
+  box-sizing: border-box;
+  padding: 10px;
+  transition: 0.2s all ease;
+  position: relative;
+  >.box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    box-sizing: border-box;
+    padding-top: 35px;
+    // 工具栏
+    >.tool {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 30px;
+      >.user_info {
+        float: right;
+        width: 100px;
+        height: 100%;
+        >.item {
+          width: 50%;
+          height: 100%;
+          float: left;
+          cursor: pointer;
+        }
+        >.user {
+          background: url('./img/user.png') center center no-repeat;
+          background-size: contain;
+        }
+        >.leave {
+          background: url('./img/leave.png') center center no-repeat;
+          background-size: contain;
+        }
+      }
+      >.add {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100%;
+        line-height: 30px;
+        background-color: green;
+        text-align: center;
+        color: #fff;
+        font-weight: 800;
+        border-radius: 5px;
+        cursor: pointer;
+        transform: translate(0%, 0%);
+        box-shadow: 0px 0px 0px #fff;
+        transition: 1s all ease;
+      }
+      // ======登录状态add_btn样式
+      >.add_login {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 350px;
+        height: 200px;
+        line-height: 200px;
+        background-color: rgba( 0, 128, 0, 0.8);
+        border-radius: 10px;
+        cursor: default;
+        transform: translate(-50%, 100%);
+        box-shadow: 0px 0px 50px #fff;
+      }
+    }
+    // 列表盒子
+    >.box {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      box-sizing: border-box;
+      padding-left: 100px;
+      // 列表的导航
+      >.nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        >.item {
+          width: 100%;
+          height: @item_h;
+          line-height: @item_h;
+          text-align: center;
+          box-sizing: border-box;
+          padding-top: 1px;
+          padding-bottom: 1px;
+          >.box {
+            width: 100%;
+            height: 100%;
+            color: #fff;
+            background-color: blue;
+          }
+        }
+        >.item_name {
+          cursor: pointer;
+        }
+        >.item_name >.box:hover {
+          background-color: rgba(0, 0, 0, 0.8);
+        }
+        >.title {
+          height: @title_h;
+          line-height: @title_h;
+          margin-bottom: 2px;
+        }
+      }
+      // 数据栏
+      >.list_box {
+        width: 100%;
+        height: 100%;
+        // 标题栏
+        >.item {
+          height: @item_h;
+          width: 100%;
+          >.sp_box {
+            float: left;
+            line-height: @item_h;
+            height: 100%;
+            text-align: center;
+            font-weight: 600;
+            box-sizing: border-box;
+            border: 1px solid @sp_border_color;
+            >span {
+              display: block;
+              width: 100%;
+              height: 100%;
+              >.lun {
+                display: inline-block;
+                margin-left: 10px;
+                width: @lun_h;
+                height: @lun_h;
+                line-height: @lun_h;
+                text-align: center;
+                border-radius: 10px;
+                font-size: 12px;
+                font-weight: 800;
+                box-shadow: 0px 0px 10px #000;
+              }
+            }
+            >.done {
+              background-color: @item_bg_done;
+              color: @sp_done_color;
+              >.lun {
+                background-color: @lun_bg_done;
+                color: @lun_color_done;
+              }
+            }
+            >.now {
+              background-color: @item_bg_now;
+              font-size: 18px;
+              color: @sp_now_color;
+              >.lun {
+                background-color: @lun_bg_now;
+                color: @lun_color_now;
+              }
+            }
+            >.will {
+              background-color: @item_bg_will;
+              color: @sp_will_color;
+              >.lun {
+                background-color: @lun_bg_will;
+                color: @lun_color_will;
+              }
+            }
+          }
+        }
+        >.title {
+          height: @title_h;
+          margin-bottom: 2px;
+          >.sp_box {
+            >span {
+              line-height: @title_h;
+              height: @title_h;
+            }
+            >.done {
+              background-color: @title_bg_done;
+              color: @sp_done_color;
+            }
+            >.now {
+              background-color: @title_bg_now;
+              font-size: 18px;
+              color: @sp_now_color;
+            }
+            >.will {
+              background-color: @title_bg_will;
+              color: @sp_will_color;
+            }
+          }
+        }
+      }
+    }
+  }
+  >.box_blur * {
+    filter: blur(5px);
+  }
+  // ===============================弹窗
+  >.layer {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    >.box {
+      width: 300px;
+      height: 196px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-sizing: border-box;
+      padding-top: 36px;
+      padding-bottom: 40px;
+      background-color: green;
+      border-radius: 18px 18px 0px 0px;
+      margin-top: -20px;
+      transition: 0.2s all ease;
+      // 
+      >.title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 36px;
+        background-color: blue;
+        border-radius: 18px 18px 0px 0px;
+        box-sizing: border-box;
+        padding-left: 18px;
+        line-height: 36px;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 800;
+      }
+      // ========================================
+      >.list {
+        width: 100%;
+        height: 100%;
+        >.item {
+          width: 100%;
+          height: 33.3%;
+          position: relative;
+          box-sizing: border-box;
+          padding-left: 100px;
+          >.info {
+            width: 100px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            line-height: 40px;
+            text-align: right;
+            box-sizing: border-box;
+            padding-right: 10px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 800;
+          }
+          >.ipt {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            padding-right: 20px;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            >input {
+              width: 100%;
+              height: 100%;
+              border: none;
+              box-sizing: border-box;
+              padding-left: 5px;
+              border: 1px solid rgba(0, 0, 0, .15);
+              border-radius: 4px;
+              color: #000;
+              outline: none;
+              font-size: 14px;
+              font-weight: 800;
+            }
+            >div {
+              width: 100%;
+              height: 100%;
+              >input {
+                width: 100%;
+                height: 100%;
+                border: none;
+                box-sizing: border-box;
+                padding-left: 5px;
+                border: 1px solid rgba(0, 0, 0, .15);
+                border-radius: 4px;
+                color: #000;
+                outline: none;
+                font-size: 14px;
+                font-weight: 800;
+              }
+            }
+          }
+        }
+      }
+      // ========================================
+      >.btn {
+        width: 80px;
+        height: 80px;
+        position: absolute;
+        cursor: pointer;
+        border-radius: 40px;
+        transition: 0.1s all ease;
+      }
+      >.btn:hover {
+        width: 100px;
+        height: 100px;
+        border-radius: 50px;
+      }
+      >.save {
+        background: url('./img/save.png') center center no-repeat;
+        background-size: contain;
+        background-color: #fff;
+        left: 0;
+        bottom: 0;
+        transform: translate(-50%, 50%);
+      }
+      >.close {
+        background: url('./img/close.png') center center no-repeat;
+        background-size: contain;
+        background-color: #fff;
+        right: 0;
+        bottom: 0;
+        transform: translate(50%, 50%);
+      }
+      >.del {
+        background: url('./img/del.png') center center no-repeat;
+        background-size: contain;
+        background-color: #fff;
+        right: 0;
+        top: 0;
+        transform: translate(50%, -50%);
+      }
+    }
+    >.box_none {
+      display: none;
+    }
+  }
+}
+
+
+/* -------------------------------- */
+
+.bg_1 {
+  background: url('./img/1.gif') center center no-repeat;
+  background-color: rgb(38, 38, 38);
+  background-size: contain;
+}
+
+.bg_2 {
+  background: url('./img/2.gif') center center no-repeat;
+  background-color: rgb(33, 10, 31);
+  background-size: contain;
+}
+
+.bg_3 {
+  background: url('./img/3.gif') center center no-repeat;
+  background-color: rgb(38, 38, 38);
+  background-size: contain;
+}
+
+.bg_4 {
+  background: url('./img/4.gif') center center no-repeat;
+  background-color: rgb(38, 38, 38);
+  background-size: cover;
+}
+
+.bg_5 {
+  background: url('./img/5.gif') center center no-repeat;
+  background-color: rgb(38, 38, 38);
+  background-size: cover;
+}
+
+.bg_6 {
+  background: url('./img/6.gif') center center no-repeat;
+  background-color: rgb(70, 66, 110);
+  background-size: contain;
+}
+
+.bg_7 {
+  background: url('./img/7.gif') center center no-repeat;
+  background-color: rgb(52, 73, 94);
+  background-size: contain;
+}

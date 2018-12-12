@@ -1,8 +1,9 @@
-# webpack + express
+# vue + webpack + express 一个端口开发
 
 ### 1.说明
 
 * 解决node-4最后提出的问题：前端用webpack进行测试和build，后台用express提供服务。怎么产生一个公用端口开发的一个工具。
+* 实现前后一个端口开发。优点：一个端口，不涉及到跨域，缺点：每次改动后台代码都得重新启动dev服务。
 
 ### 2.JS_demo
 
