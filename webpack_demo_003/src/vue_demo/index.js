@@ -17,8 +17,8 @@
 // Vue.use(DatePicker);
 // Vue.use(Select);
 
-import { DatePicker} from 'element-ui';
-Vue.use(DatePicker);
+// import { DatePicker} from 'element-ui';
+// Vue.use(DatePicker);
 
 
 // ================================================vuex

@@ -1,5 +1,5 @@
 // 要测试那个模块
-var one = './src/vue_demo/';
+var one = './src/dom_demo/';
 
 
 
@@ -53,7 +53,67 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 const opn = require('opn');
 // *********************************************依赖的包
+var rules = [
+  // vue
+  {
+    test: /\.vue$/,
+    loader: 'vue-loader',
+    options: {
+      // vue-loader options go here
+    }
+  },
+  // js
+  {
+    test: /\.js$/,
+    loader: 'babel-loader',
+    exclude: /node_modules/
+  },
+  // ------------------------------------
 
+  {
+    test: /\.css$/,
+    loader: 'style-loader!css-loader'
+  },
+  //
+  {
+    test: /\.less$/,
+    loader: 'style-loader!css-loader!less-loader'
+  },
+
+
+  // fonts
+  {
+    test: /\.(eot|svg|ttf|woff|woff2)$/,
+    loader: 'url-loader',
+    query: {
+      limit: 10000,
+      // 一样这个。
+      name: `${opts.font}/[name].[hash:7].[ext]`
+    }
+  },
+  // img
+  {
+    // test: /\.(png|jpg|gif|svg)$/,
+    test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+    loader: 'url-loader',
+    query: {
+      limit: 10000,
+      // 一样这个。
+      name: `${opts.img}/[name].[hash:7].[ext]`
+    }
+  },
+  // hdr
+  {
+    // test: /\.(png|jpg|gif|svg)$/,
+    test: /\.hdr$/,
+    loader: 'url-loader',
+    query: {
+      // limit: 10000,
+      // 一样这个。
+      name: `${opts.img}/[name].[hash:7].[ext]`
+    }
+  }
+];
 
 // dev模式
 if (process.env.NODE_ENV == 'dev') {
@@ -71,58 +131,9 @@ if (process.env.NODE_ENV == 'dev') {
     ],
     // 使用loader模块
     module: {
-      rules: [
-        // vue
-        {
-          test: /\.vue$/,
-          loader: 'vue-loader',
-          options: {
-            // vue-loader options go here
-          }
-        },
-        // js
-        {
-          test: /\.js$/,
-          loader: 'babel-loader',
-          exclude: /node_modules/
-        },
-        // ------------------------------------
-
-        {
-          test: /\.css$/,
-          loader: 'style-loader!css-loader'
-        },
-        //
-        {
-          test: /\.less$/,
-          loader: 'style-loader!css-loader!less-loader'
-        },
-
-
-        // fonts
-        {
-          test: /\.(eot|svg|ttf|woff|woff2)$/,
-          loader: 'url-loader',
-          query: {
-            limit: 10000,
-            // 一样这个。
-            name: `${opts.font}/[name].[hash:7].[ext]`
-          }
-        },
-        // img
-        {
-          // test: /\.(png|jpg|gif|svg)$/,
-          test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-          loader: 'url-loader',
-          query: {
-            limit: 10000,
-            // 一样这个。
-            name: `${opts.img}/[name].[hash:7].[ext]`
-          }
-        }
-      ]
+      rules:rules
     },
-    // 只对命令行模式管用
+    // 只对命令行方式管用
     // devServer: {
     //   // 本地服务器所加载的页面所在的目录后，需要手动打出8080/index.html路径
     //   contentBase: "./webapp",
@@ -203,6 +214,8 @@ else {
       // }),
       // -------------------------------------css--生成的地方
       new ExtractTextPlugin('[name].[hash:7].css'),
+
+      
       // -------------------------------------压缩JS文件
       new webpack.optimize.UglifyJsPlugin({
         compress: {
@@ -234,61 +247,7 @@ else {
     ],
     // 使用loader模块
     module: {
-      rules: [
-        // vue
-        {
-          test: /\.vue$/,
-          loader: 'vue-loader',
-          options: {
-            // vue-loader options go here
-          }
-        },
-        // js
-        {
-          test: /\.js$/,
-          loader: 'babel-loader',
-          exclude: /node_modules/
-        },
-        // ------------------------------------
-        // css
-        {
-          test: /\.css$/,
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: 'css-loader'
-          })
-        },
-        // less
-        {
-          test: /\.less$/,
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: ['css-loader', 'less-loader']
-          })
-        },
-        // ------------------------------------
-        // fonts
-        {
-          test: /\.(eot|svg|ttf|woff|woff2)$/,
-          loader: 'url-loader',
-          query: {
-            limit: 10000,
-            // 一样这个。
-            name: `${opts.font}/[name].[hash:7].[ext]`
-          }
-        },
-        // img
-        {
-          // test: /\.(png|jpg|gif|svg)$/,
-          test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-          loader: 'url-loader',
-          query: {
-            limit: 1,
-            // 一样这个。
-            name: `${opts.img}/[name].[hash:7].[ext]`
-          }
-        }
-      ]
+      rules:rules
     },
   };
   webpack(build, function(err, stats) {

@@ -14,7 +14,7 @@ var opts = {
   font: 'fonts',
 
   // 
-  port:1234,
+  port: 1234,
 };
 
 
@@ -54,6 +54,67 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const opn = require('opn');
 // *********************************************依赖的包
 
+var rules = [
+  // vue
+  {
+    test: /\.vue$/,
+    loader: 'vue-loader',
+    options: {
+      // vue-loader options go here
+    }
+  },
+  // js
+  {
+    test: /\.js$/,
+    loader: 'babel-loader',
+    exclude: /node_modules/
+  },
+  // ------------------------------------
+
+  {
+    test: /\.css$/,
+    loader: 'style-loader!css-loader'
+  },
+  //
+  {
+    test: /\.less$/,
+    loader: 'style-loader!css-loader!less-loader'
+  },
+
+
+  // fonts
+  {
+    test: /\.(eot|svg|ttf|woff|woff2)$/,
+    loader: 'url-loader',
+    query: {
+      limit: 10000,
+      // 一样这个。
+      name: `${opts.font}/[name].[hash:7].[ext]`
+    }
+  },
+  // img
+  {
+    // test: /\.(png|jpg|gif|svg)$/,
+    test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+    loader: 'url-loader',
+    query: {
+      limit: 10000,
+      // 一样这个。
+      name: `${opts.img}/[name].[hash:7].[ext]`
+    }
+  },
+  // hdr
+  {
+    // test: /\.(png|jpg|gif|svg)$/,
+    test: /\.hdr$/,
+    loader: 'url-loader',
+    query: {
+      // limit: 10000,
+      // 一样这个。
+      name: `${opts.img}/[name].[hash:7].[ext]`
+    }
+  }
+];
 
 // dev模式
 if (process.env.NODE_ENV == 'dev') {
@@ -71,56 +132,7 @@ if (process.env.NODE_ENV == 'dev') {
     ],
     // 使用loader模块
     module: {
-      rules: [
-        // vue
-        {
-          test: /\.vue$/,
-          loader: 'vue-loader',
-          options: {
-            // vue-loader options go here
-          }
-        },
-        // js
-        {
-          test: /\.js$/,
-          loader: 'babel-loader',
-          exclude: /node_modules/
-        },
-        // ------------------------------------
-
-        {
-          test: /\.css$/,
-          loader: 'style-loader!css-loader'
-        },
-        //
-        {
-          test: /\.less$/,
-          loader: 'style-loader!css-loader!less-loader'
-        },
-
-
-        // fonts
-        {
-          test: /\.(eot|svg|ttf|woff|woff2)$/,
-          loader: 'url-loader',
-          query: {
-            limit: 10000,
-            // 一样这个。
-            name: `${opts.font}/[name].[hash:7].[ext]`
-          }
-        },
-        // img
-        {
-          // test: /\.(png|jpg|gif|svg)$/,
-          test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-          loader: 'url-loader',
-          query: {
-            limit: 10000,
-            // 一样这个。
-            name: `${opts.img}/[name].[hash:7].[ext]`
-          }
-        }
-      ]
+      rules:rules
     },
     // 只对命令行模式管用
     // devServer: {
@@ -163,7 +175,7 @@ if (process.env.NODE_ENV == 'dev') {
       //   res.send({ ret: 12 });
       // });
       // app.use(router);
-      
+
       require('./api_server/app.js')(app);
     },
     // 编译的状态
@@ -225,61 +237,7 @@ else {
     ],
     // 使用loader模块
     module: {
-      rules: [
-        // vue
-        {
-          test: /\.vue$/,
-          loader: 'vue-loader',
-          options: {
-            // vue-loader options go here
-          }
-        },
-        // js
-        {
-          test: /\.js$/,
-          loader: 'babel-loader',
-          exclude: /node_modules/
-        },
-        // ------------------------------------
-        // css
-        {
-          test: /\.css$/,
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: 'css-loader'
-          })
-        },
-        // less
-        {
-          test: /\.less$/,
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: ['css-loader', 'less-loader']
-          })
-        },
-        // ------------------------------------
-        // fonts
-        {
-          test: /\.(eot|svg|ttf|woff|woff2)$/,
-          loader: 'url-loader',
-          query: {
-            limit: 10000,
-            // 一样这个。
-            name: `${opts.font}/[name].[hash:7].[ext]`
-          }
-        },
-        // img
-        {
-          // test: /\.(png|jpg|gif|svg)$/,
-          test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-          loader: 'url-loader',
-          query: {
-            limit: 1,
-            // 一样这个。
-            name: `${opts.img}/[name].[hash:7].[ext]`
-          }
-        }
-      ]
+      rules:rules
     },
   };
   webpack(build, function(err, stats) {
