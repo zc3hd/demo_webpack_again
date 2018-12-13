@@ -275,8 +275,24 @@ else {
 被输出的css里对img的引用问题，img也有相应的loader处理，指定img的处理路径，CSS内部的img路径也会相应的变化。原来的认识是错误的，css内的img的路径是会改变的。img和font没有被固定。
 
 ------------------------------------------------
-【见鬼了】把dev和build的rules单独拿出来，形成公共配置项。再次打包DOM项目，见鬼了。尽然把CSS打包到JS内部了。如果这样的话，那么就和vue项目没有区别了，都是被打包到JS内部了。
+【没有见鬼】把dev和build的rules单独拿出来，形成公共配置项。再次打包DOM项目，见鬼了。尽然把CSS打包到JS内部了。如果这样的话，那么就和vue项目没有区别了，都是被打包到JS内部了。
 
+【dev】没有见鬼,就是下面的区别。
+// 
+{
+  test: /\.css$/,
+  loader: 'style-loader!css-loader'
+},
+
+【build】
+// css
+{
+  test: /\.css$/,
+  use: ExtractTextPlugin.extract({
+    fallback: 'style-loader',
+    use: 'css-loader'
+  })
+},
 ```
 
 * 【vue项目】
@@ -286,6 +302,7 @@ vue文件的<style lang="less"> @import './index.less'; </style>
 
 2.被输出到哪里？
 会被打包到JS内部。那就是 没有单独的路径了。
+引入的eleUI组件的CSS就会单独分离出来
 
 3.img路径问题？
 和上面一样，img和font的输出配置到哪里，这个被打包JS内的css的对img和font引用就相对应的改变。
@@ -294,6 +311,36 @@ vue文件的<style lang="less"> @import './index.less'; </style>
 ### 问题：
 
 * 1.css何时会把单独分离？何时会被打包到JS内部？
+* 注意配置。
+
+* 2.css加前缀配置：
+```
+// less
+{
+  test: /\.less$/,
+  use: ExtractTextPlugin.extract({
+    fallback: 'style-loader',
+    use: [
+      // 
+      "css-loader",
+      // 
+      {
+        loader: 'postcss-loader',
+        options: {
+          ident: 'postcss',
+          plugins: [
+            require('autoprefixer')({
+              browsers: ['last 10 versions', 'Firefox >= 20', 'Android >= 4.0', 'iOS >= 8']
+            }),
+          ]
+        }
+      },
+      // 
+      'less-loader',
+    ]
+  })
+},
+```
 
 
 

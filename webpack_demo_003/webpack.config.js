@@ -38,17 +38,18 @@ var build_base_str = one.replace(one_arr[1], opts.dist);
 
 
 // *********************************************依赖的包
+const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackDevServer = require('webpack-dev-server');
 
 
-const path = require('path');
+// 指定入口HTML
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 // 用于剥离css的
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 //webpack插件，用于清除目录文件
-const CleanPlugin = require('clean-webpack-plugin')
-  // 压缩
+const CleanPlugin = require('clean-webpack-plugin');
+// 压缩
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 const opn = require('opn');
@@ -70,17 +71,6 @@ var rules = [
   },
   // ------------------------------------
 
-  {
-    test: /\.css$/,
-    loader: 'style-loader!css-loader'
-  },
-  //
-  {
-    test: /\.less$/,
-    loader: 'style-loader!css-loader!less-loader'
-  },
-
-
   // fonts
   {
     test: /\.(eot|svg|ttf|woff|woff2)$/,
@@ -97,7 +87,7 @@ var rules = [
     test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
     loader: 'url-loader',
     query: {
-      limit: 10000,
+      // limit: 10000,
       // 一样这个。
       name: `${opts.img}/[name].[hash:7].[ext]`
     }
@@ -108,15 +98,33 @@ var rules = [
     test: /\.hdr$/,
     loader: 'url-loader',
     query: {
-      // limit: 10000,
+      limit: 10000,
       // 一样这个。
       name: `${opts.img}/[name].[hash:7].[ext]`
     }
   }
 ];
 
+// ------------------------------------
+
+
+var new_rules = null;
 // dev模式
 if (process.env.NODE_ENV == 'dev') {
+  var dev_css = [
+    // 
+    {
+      test: /\.css$/,
+      loader: 'style-loader!css-loader'
+    },
+    //
+    {
+      test: /\.less$/,
+      loader: 'style-loader!css-loader!less-loader'
+    },
+  ];
+  new_rules = rules.concat(dev_css);
+
   // dev的配置项
   const conf = {
     devtool: 'eval-source-map',
@@ -131,7 +139,7 @@ if (process.env.NODE_ENV == 'dev') {
     ],
     // 使用loader模块
     module: {
-      rules:rules
+      rules: new_rules
     },
     // 只对命令行方式管用
     // devServer: {
@@ -178,7 +186,6 @@ if (process.env.NODE_ENV == 'dev') {
     // 编译的状态
     stats: { colors: true }
   });
-
   server.listen(opts.port, function() {
     console.log('dev-sever--- is--- on--->>>1234');
     opn('http://localhost:1234', { app: 'chrome' });
@@ -186,6 +193,57 @@ if (process.env.NODE_ENV == 'dev') {
 }
 // build模式
 else {
+  var build_css = [
+    // css
+    {
+      test: /\.css$/,
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [
+          // 
+          "css-loader",
+          // 
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: [
+                require('autoprefixer')({
+                  browsers: ['last 10 versions', 'Firefox >= 20', 'Android >= 4.0', 'iOS >= 8']
+                }),
+              ]
+            }
+          },
+        ]
+      })
+    },
+    // less
+    {
+      test: /\.less$/,
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [
+          // 
+          "css-loader",
+          // 
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: [
+                require('autoprefixer')({
+                  browsers: ['last 10 versions', 'Firefox >= 20', 'Android >= 4.0', 'iOS >= 8']
+                }),
+              ]
+            }
+          },
+          // 
+          'less-loader',
+        ]
+      })
+    },
+  ];
+  new_rules = rules.concat(build_css);
   const build = {
     entry: {
       index: `${opts.src}index.js`,
@@ -215,7 +273,7 @@ else {
       // -------------------------------------css--生成的地方
       new ExtractTextPlugin('[name].[hash:7].css'),
 
-      
+
       // -------------------------------------压缩JS文件
       new webpack.optimize.UglifyJsPlugin({
         compress: {
@@ -247,7 +305,7 @@ else {
     ],
     // 使用loader模块
     module: {
-      rules:rules
+      rules: new_rules
     },
   };
   webpack(build, function(err, stats) {
