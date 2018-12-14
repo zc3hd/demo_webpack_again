@@ -6,8 +6,7 @@
 "webpack": "^2.2.1",
 "webpack-dev-server": "^2.3.0"
 ```
-* 解决node-4最后提出的问题：前端用webpack进行测试和build，后台用express提供服务。怎么产生一个公用端口开发的一个工具。
-* 实现前后一个端口开发。优点：一个端口，不涉及到跨域，缺点：每次改动后台代码都得重新启动dev服务。
+* 解决node-4最后提出的问题：前端用webpack进行dev和build，后台用express提供服务。怎么在一个公用端口开发的一个工具。优点：一个端口，不涉及到跨域，缺点：每次改动后台代码都得重新启动dev服务。
 
 ### 2.JS_demo
 
@@ -106,8 +105,6 @@ module.exports = function(app) {
 * webpack内的引用:
 ```
     setup: function(app) {
-      // 这个app就是express生成的app
-
       require('./api_server/app.js')(app);
     },
 ```
@@ -121,7 +118,6 @@ module.exports = function(app) {
 },
 ```
 
-* 最后这也是demo-webpack-004最后的需要：【webpack+express】
 
 
 

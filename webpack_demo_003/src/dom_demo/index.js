@@ -5,7 +5,7 @@ require.ensure([], function(require) {
   console.log(async_test);
 }, 'async_test');
 
-
+// 引入外部样式
 var style = require('./index.less');
 
 $('#app')
